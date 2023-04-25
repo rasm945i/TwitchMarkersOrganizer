@@ -13,9 +13,9 @@ class ClipController extends Controller
         $clips = Clip::where('relatedMarkerId', $marker_id);
         $count = $clips->count;
         if($count > 1) {
-            return view('clip_multiple', ['clips', $clips]);
+            return view('clip.multiple', ['clips', $clips]);
         } elseif($count == 1) {
-            return view('clip_single', ['clip', $clips]);
+            return view('clip.single', ['clip', $clips]);
         }
         return view('nothing_found', ['searched_for', 'Clips']);
     }
@@ -23,18 +23,18 @@ class ClipController extends Controller
     // Get the clip with the ID provided
     function getClip($clip_id) {
         $clip = Clip::where('id', $clip_id);
-        return view('clip_single', ['clip' => $clip]);
+        return view('clip.single', ['clip' => $clip]);
     }
 
     // Search for a clip
     function searchByTitle($partial_title) {
         $clips = Clip::where('title', 'LIKE', '%'. $partial_title .'%');
-        return view('clip_multiple', ['clips' => $clips]);
+        return view('clip.multiple', ['clips' => $clips]);
     }
 
     // Get all clips
     function getAllClips() {
-        return view('clip_multiple', ['clips' => Clip::all()]);
+        return view('clip.multiple', ['clips' => Clip::all()]);
     }
 
 }

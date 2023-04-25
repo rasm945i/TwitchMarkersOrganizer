@@ -15,16 +15,16 @@ class MarkerController extends Controller
         } else {
             $markers = Marker::all();
         }
-        return view('marker_search', ['markers' => $markers]);
+        return view('marker.search', ['markers' => $markers]);
     }
 
     function getMarker($markerId) {
-        return view('marker_search', ['markers' => Marker::where('id', $markerId)->get()]);
+        return view('marker.single', ['markers' => Marker::where('id', $markerId)->get()]);
     }
 
-    function getMarkersByGame($gameId, Request $request) {
+    function getMarkersByGame(int $gameId, Request $request) {
         $markers = (new Marker())->getMarkersByGameId($gameId, $request->get('excludeAlreadyClipped', true));
-        return view('marker_search', ['markers' => $markers]);
+        return view('marker.search', ['markers' => $markers]);
     }
 
 }
